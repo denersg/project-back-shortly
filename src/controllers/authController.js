@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 import userRepository from "../repositories/userRepository.js";
+import sessionRepository from "../repositories/sessionRepository.js";
 
 export async function signUp(req, res){
     const user = req.body;
@@ -22,4 +24,18 @@ export async function signUp(req, res){
     }
 }
 
-export async function signIn(req, res){}
+export async function signIn(req, res){
+    const user = req.body;
+
+    //Efetua a busca de usuario por email
+    const findUser = await userRepository.getUserByEmail(user.email);
+    if(findUser.rowCount === 0){
+        return res.sendStatus(401); //Não autorizado
+    }
+
+    if(bcrypt.compareSync(user.password, findUser.password)){
+        const token = uuid();
+        await sessionRepository.createSession(findUser, token);
+        return res.send(token);
+    }
+}
