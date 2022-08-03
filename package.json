@@ -1,0 +1,23 @@
+{
+    "name": "back-projeto16-shortly",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "chalk": "^5.0.1",
+        "cors": "^2.8.5",
+        "dayjs": "^1.11.2",
+        "dotenv": "^16.0.0",
+        "express": "^4.18.1",
+        "joi": "^17.6.0",
+        "nanoid": "^4.0.0",
+        "pg": "^8.7.3",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}
