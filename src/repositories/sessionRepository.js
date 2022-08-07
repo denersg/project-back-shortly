@@ -1,6 +1,6 @@
 import db from "../db.js";
 
-async function createSession(user, token){
+async function createSession(token, user){
     return(
         db.query(`
             INSERT INTO sessions (token, "userId")
@@ -9,8 +9,15 @@ async function createSession(user, token){
     );
 }
 
+async function getSessionByToken(token){
+    return(
+        db.query("SELECT * FROM sessions WHERE token = $1", [token])
+    );
+}
+
 const sessionRepository = {
-    createSession
+    createSession,
+    getSessionByToken
 };
 
 export default sessionRepository;
