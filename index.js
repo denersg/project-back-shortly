@@ -6,7 +6,7 @@ import router from "./src/routes/index.js";
 
 dotenv.config();
 
-const app = express();//Cria o servidor
+const app = express();
 
 app.use(json());
 app.use(cors());
