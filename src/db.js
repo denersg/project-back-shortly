@@ -4,16 +4,11 @@ dotenv.config();
 
 const { Pool } = pg;
 
-const config = {
-    connectionString: process.env.DATABASE_URL
-}
-
-if(process.env.MODE === "PROD"){
-    config.ssl = {
+const db = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
         rejectUnauthorized: false
     }
-}
-
-const db = new Pool(config);
+});
 
 export default db;
